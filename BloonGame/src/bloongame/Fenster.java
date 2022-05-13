@@ -37,7 +37,7 @@ public class Fenster extends JFrame{
         
         buttonst.addActionListener((ActionEvent ae) -> {  
             System.out.print("Start" + "\n");
-            this.StarteSpiel();
+            //this.StarteSpiel();
             });
 
 }
