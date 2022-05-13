@@ -5,9 +5,9 @@ import javax.swing.JPanel;
 
 public class Statistik extends JPanel {
 
-    private JLable time = new JLabel();
-    private JLable leben = new JLabel();
-    private JLable counter = new JLabel();
+    private JLable lblTime = new JLabel();
+    private JLable lblLeben = new JLabel();
+    private JLable lblBloonCounter = new JLabel();
 
 public Statistik() {
 
