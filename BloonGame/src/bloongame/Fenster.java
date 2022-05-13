@@ -22,7 +22,7 @@ public class Fenster extends JFrame{
      public Fenster() {
          
         this.setLayout(null);
-        this.setSize(1920,1080);
+        this.setSize(800,600);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setTitle("Bloongame");
         this.getContentPane().setBackground(Color.WHITE);
