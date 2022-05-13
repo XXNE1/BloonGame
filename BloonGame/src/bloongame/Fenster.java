@@ -19,7 +19,7 @@ public class Fenster extends JFrame{
     
     
     
-     public Fenster() {
+    public Fenster() {
          
         this.setLayout(null);
         this.setSize(800,600);
@@ -38,7 +38,13 @@ public class Fenster extends JFrame{
         buttonst.addActionListener((ActionEvent ae) -> {  
             System.out.print("Start" + "\n");
             this.starteSpiel();
-            });
-
-}
+        });   
+    }
+    
+    public void starteSpiel(){
+        
+        
+    }
+     
+     
 }

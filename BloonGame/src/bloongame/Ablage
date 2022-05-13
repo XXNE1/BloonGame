@@ -1,0 +1,51 @@
+
+
+
+BloonGame
+--
++ main() : void
+
+
+-- Fenster:JFrame
+--
+- btnstart : JButton()
+- btnreset : JButton()
+--
++Fenster()
++gameloop: Gameloop 
+
+Statistik : JPanel
+--
+--
++Statistik()
++refresh(time:time, leben:int, blooncount:int) : void
+
+
+Game : JPanel
+--
+-timer: Timer
+-statistik : Statistik()
+-bloonliste : ArrayList
+-highscore: int
+-zeit: int
+-leben: int
+-blooncount: int
+--
++ Game()
++ tick() : void
++ blooncheck()
++ bloondelete() : void
++ bloonbewegen() : void
+
+Bloon
+--
+- speed : int
+- richtungX : int
+- richtungY : int
+--
++ Bloon()
+- sbloon() : void
+- mbloon() : void
+- lbloon() : void
+- jbloon() : void
+
