@@ -12,7 +12,7 @@ BloonGame
 - btnreset : JButton()
 --
 +Fenster()
-+gameloop: Gameloop 
+
 
 Statistik : JPanel
 --
@@ -32,8 +32,7 @@ Game : JPanel
 -blooncount: int
 --
 + Game()
-+ tick() : void
-+ blooncheck()
++gameloop(): void
 + bloondelete() : void
 + bloonbewegen() : void
 
