@@ -28,16 +28,16 @@ public class Bloon extends JButton{
                 break;            
         }  
        
-   }
+    } 
    
     public void sBloon(){
-        this.setSize(10,10);
+        this.setSize(13,13);
         this.setBackground(Color.yellow); 
         this.setWerte(6, 6);        
     }
     
     private void mBloon(){
-        this.setSize(15,15);
+        this.setSize(16,16);
         this.setBackground(Color.green);
         this.setWerte(3, 3); 
     }
@@ -52,6 +52,13 @@ public class Bloon extends JButton{
        this.setSize(50,50);
     }     
 
+     public void setRichtungX(int richtungX) {
+        this.richtungX = richtungX;    }
+     
+    public void setRichtungY(int richtungY) {
+        this.richtungY = richtungY;   
+    }
+    
     public int getRichtungX() {
         return richtungX;
     }
@@ -60,6 +67,8 @@ public class Bloon extends JButton{
         return richtungY;
     }
    
+    // überarbeiten
+    
     public void setWerte(int minX, int minY){        
         this.richtungX = rnd.nextInt((minX+3)*2)+1 - minX;
         this.richtungY = rnd.nextInt((minY+3)*2)+1 - minY;        

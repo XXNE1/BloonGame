@@ -1,5 +1,6 @@
 package bloongame;
 
+import java.awt.Color;
 import javax.swing.JPanel;
 import java.awt.event.ActionEvent;
 import java.util.ArrayList;
@@ -11,17 +12,22 @@ import javax.swing.Timer;
 public class Game extends JPanel{
     
     private ArrayList<Bloon> bloonList = new ArrayList<Bloon>();
+    private ArrayList<Bloon> deleteList = new ArrayList<Bloon>();
     private Statistik statistik = new Statistik();
     private Random rnd = new Random();
     private Timer t;
     private int time = 0;
     private int leben = 5;
+    private int points = 0;
     private int bloonCounter;
-
+    private int spawnRate = 3; //Bloons pro 5sec
     
     public Game(){
         this.setSize(780, 400);  
-        statistik.setLocation(this.getWidth()-statistik.getWidth(), 0);                
+        this.setBackground(Color.gray);
+        this.setLayout(null);
+        statistik.setLocation(this.getWidth()-statistik.getWidth() , 0); 
+        this.add(statistik);        
         
         t = new Timer(50, (ActionEvent ae) -> {
             this.gameLoop();
@@ -30,43 +36,116 @@ public class Game extends JPanel{
     }
     
     public void startGame(){
-        t.start();
-        for (int i = 0; i < rnd.nextInt(4)+2; i++) {
+        t.start();        
+        for (int i = 0; i < rnd.nextInt(4)+5; i++) {
             this.createBloon();  
-            this.add(bloonList.get(i));  
+            this.add(bloonList.get(i));            
         }  
     }    
     
     public void gameLoop(){
+        this.checkDeleteLsit();
         for (int i = 0; i < bloonList.size(); i++) {
             this.bloonBewegen(i);
-            this.add(bloonList.get(i));            
+            this.add(bloonList.get(i));
         }
-        statistik.refresh(this.time, this.leben, this.bloonCounter);
-        this.time += t.getInitialDelay();
+        statistik.refresh(this.time, this.leben, this.points);
+        this.time += t.getInitialDelay();        
+        this.newBloons();
+        this.repaint();
     }    
     
     public void createBloon(){
         Bloon newBloon = new Bloon(rnd.nextInt(3));               
-        newBloon.setLocation(rnd.nextInt(this.getWidth() - 60)+30, rnd.nextInt(this.getHeight() - 60)+30);
+        newBloon.setLocation(rnd.nextInt(this.getWidth() - statistik.getWidth() - 60)+30, rnd.nextInt(this.getHeight() - 60)+30);   
         
-        
-        // mögliche Lösung durch list loopen und Objekt getten und dann alles
         newBloon.addActionListener((ActionEvent ae) -> {                        
-            this.addBloonCounter();
-            this.remove(this); // gibt vielleicht Fehler !!!!!!!!!!!!!!!!!!!!
-            bloonList.remove(this);
-        }); 
+            this.addBloonCounter(); 
+            this.addPoints();   
+            deleteList.add(newBloon); 
+            this.remove(newBloon); 
+        });         
         bloonList.add(newBloon);
     }
     
-    public void bloonBewegen(int a){
-        Bloon b = bloonList.get(a);
-        bloonList.get(a).setLocation(b.getX() + (b.getRichtungX()), b.getY()+(b.getRichtungY()));
+    public void newBloons(){        
+        if(rnd.nextInt(100) <= this.spawnRate){
+            this.createBloon();
+        }        
     }
+    
+    public void bloonBewegen(int a){
+        
+        int borderO = 0;
+        int borderU = this.getHeight();
+        
+        int borderL = 0;
+        int borderR = this.getWidth() - statistik.getWidth();        
+                
+        Bloon b = bloonList.get(a);
+               
+        if(  b.getX() <= borderL ||  b.getX() + b.getWidth() >= borderR){  
+            this.despawn(a);
+            bloonList.get(a).setRichtungX(-b.getRichtungX());            
+        }
+        else if(b.getY() <= borderO){
+            this.despawn(a);
+            bloonList.get(a).setLocation(b.getX(), borderO);
+            bloonList.get(a).setRichtungY(-b.getRichtungY());
+        }
+        else if(b.getY() + b.getHeight() >= borderU){
+            this.despawn(a);
+            bloonList.get(a).setLocation(b.getX(), borderU-b.getHeight());
+            bloonList.get(a).setRichtungY(-b.getRichtungY());
+        } 
+        bloonList.get(a).setLocation(b.getX() + (b.getRichtungX()), b.getY()+(b.getRichtungY()));        
+        
+    }
+    
+    public void checkDeleteLsit(){
+        for (int i = 0; i < this.deleteList.size(); i++) {
+            this.remove(deleteList.get(i));
+            this.bloonList.remove(deleteList.get(i));            
+        }        
+    }
+    
+    public void despawn(int a){        
+        if(rnd.nextInt(100) <= 20){
+            this.remove(this.bloonList.get(a));
+            deleteList.add(this.bloonList.get(a));
+            this.removeLeben();
+        } 
+    }
+    
     
     public void addBloonCounter() { //vielleicht anderer Name
         this.bloonCounter ++;
     }
     
+    public void addPoints(){
+        this.points += 1;
+    }
+    
+    public void removeLeben(){
+        this.leben -= 1;
+    }
+    
+    public void pauseGame(){
+        t.stop();
+    }
+    
+    public void continueGame(){
+        t.start();
+    }
+    
+    public void restartGame(){
+        t.stop();
+        t.restart();
+        for (int i = 0; i < bloonList.size(); i++) {
+            this.remove(bloonList.get(i));            
+        }    
+        this.repaint();    
+        this.bloonList.clear();
+        
+    }    
 }
