@@ -17,7 +17,7 @@ public class Game extends JPanel{
     private Random rnd = new Random();
     private Timer t;
     private int time = 0;
-    private int leben = 5;
+    private int leben = 20;
     private int points = 0;
     private int bloonCounter;
     private int spawnRate = 3; //Bloons pro 5sec
@@ -29,8 +29,8 @@ public class Game extends JPanel{
         statistik.setLocation(this.getWidth()-statistik.getWidth() , 0); 
         this.add(statistik);        
         
-        t = new Timer(50, (ActionEvent ae) -> {
-            this.gameLoop();
+        t = new Timer(50, (ActionEvent ae) -> {            
+            this.gameLoop();                       
         });
         
     }
@@ -115,8 +115,7 @@ public class Game extends JPanel{
             deleteList.add(this.bloonList.get(a));
             this.removeLeben();
         } 
-    }
-    
+    }    
     
     public void addBloonCounter() { //vielleicht anderer Name
         this.bloonCounter ++;
@@ -128,6 +127,13 @@ public class Game extends JPanel{
     
     public void removeLeben(){
         this.leben -= 1;
+        if(leben <= 0){
+            this.endGame();
+        }        
+    }
+
+    public void endGame() {        
+        this.t.stop();
     }
     
     public void pauseGame(){
@@ -136,6 +142,7 @@ public class Game extends JPanel{
     
     public void continueGame(){
         t.start();
+        this.endScene();
     }
     
     public void restartGame(){
@@ -147,5 +154,10 @@ public class Game extends JPanel{
         this.repaint();    
         this.bloonList.clear();
         
-    }    
+    }  
+    
+    public void endScene(){
+        // Endstats + ieleicht animation (eigenes Panel?)
+    }
+    
 }
