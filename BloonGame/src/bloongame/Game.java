@@ -167,14 +167,8 @@ public class Game extends JPanel{
  
     public void spawnRate(){
         if (spawnRate <= 8) {
-            this.spawnRate = spawnRate + 0.1;
-            System.out.println(spawnRate);
-        }
-
-        
+            this.spawnRate = spawnRate + 0.1;            
+        }        
     }
-    
-    
-    
     
 }
