@@ -20,7 +20,9 @@ public class Game extends JPanel{
     private int leben = 20;
     private int points = 0;
     private int bloonCounter;
-    private int spawnRate = 3; //Bloons pro 5sec
+    private double spawnRate = 3.0; //Bloons pro 5sec
+
+    
     
     public Game(){
         this.setSize(780, 400);  
@@ -71,6 +73,8 @@ public class Game extends JPanel{
     public void newBloons(){        
         if(rnd.nextInt(100) <= this.spawnRate){
             this.createBloon();
+            this.spawnRate();
+
         }        
     }
     
@@ -159,5 +163,17 @@ public class Game extends JPanel{
     public void endScene(){
         // Endstats + ieleicht animation (eigenes Panel?)
     }
+ 
+    public void spawnRate(){
+        if (spawnRate <= 8) {
+            this.spawnRate = spawnRate + 0.1;
+            //System.out.println(spawnRate);
+        }
+
+        
+    }
+    
+    
+    
     
 }
