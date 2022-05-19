@@ -75,7 +75,6 @@ public class Game extends JPanel{
         if(rnd.nextInt(100) <= this.spawnRate){
             this.createBloon();
             this.spawnRate();
-
         }        
     }
     
