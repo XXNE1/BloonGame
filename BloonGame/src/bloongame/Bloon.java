@@ -32,21 +32,21 @@ public class Bloon extends JButton{
     } 
    
     public void sBloon(){
-        this.setSize(13,13);
+        this.setSize(14,14);
         this.setBackground(Color.yellow); 
-        this.setWerte(9);        
+        this.setWerte(8);        
     }
     
     private void mBloon(){
-        this.setSize(16,16);
+        this.setSize(18,18);
         this.setBackground(Color.green);
         this.setWerte(6); 
     }
     
     private void lBloon(){
-       this.setSize(20,20);
+       this.setSize(22,22);
        this.setBackground(Color.red);
-       this.setWerte(3); 
+       this.setWerte(4); 
     }
     
     private void jBloon(){
