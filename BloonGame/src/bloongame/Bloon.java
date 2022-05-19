@@ -7,6 +7,8 @@ import javax.swing.JButton;
 public class Bloon extends JButton{   
    private int richtungX;
    private int richtungY;
+   private int spawnTime;
+    private int dmg;
    Random rnd = new Random();
    private int[] sign = {1, -1};
    
@@ -60,12 +62,27 @@ public class Bloon extends JButton{
         this.richtungY = richtungY;   
     }
     
+    public void setSpawnTime(int spawnTime) {
+        this.spawnTime = spawnTime;
+    }
+    
+    public void setDmg(int dmg) {
+        this.dmg = dmg;
+    }
     public int getRichtungX() {
         return richtungX;
     }
 
     public int getRichtungY() {
         return richtungY;
+    }
+    
+    public int getDmg() {
+        return dmg;
+    }
+    
+    public int getSpawnTime() {
+        return spawnTime;
     }
    
     // überarbeiten

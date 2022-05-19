@@ -60,6 +60,7 @@ public class Game extends JPanel{
     public void createBloon(){
         Bloon newBloon = new Bloon(rnd.nextInt(3));               
         newBloon.setLocation(rnd.nextInt(this.getWidth() - statistik.getWidth() - 60)+30, rnd.nextInt(this.getHeight() - 60)+30);   
+        newBloon.setSpawnTime(this.time);
         
         newBloon.addActionListener((ActionEvent ae) -> {                        
             this.addBloonCounter(); 
@@ -114,7 +115,7 @@ public class Game extends JPanel{
     }
     
     public void despawn(int a){        
-        if(rnd.nextInt(100) <= 20){
+        if(rnd.nextInt(100) <= 20 && this.bloonList.get(a).getSpawnTime() + 2000 >= this.time){
             this.remove(this.bloonList.get(a));
             deleteList.add(this.bloonList.get(a));
             this.removeLeben();
