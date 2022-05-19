@@ -64,7 +64,7 @@ public class Game extends JPanel{
         
         newBloon.addActionListener((ActionEvent ae) -> {                        
             this.addBloonCounter(); 
-            this.addPoints();   
+            this.addPoints(4 - newBloon.getDmg());   
             deleteList.add(newBloon); 
             this.remove(newBloon); 
         });         
@@ -115,10 +115,10 @@ public class Game extends JPanel{
     }
     
     public void despawn(int a){        
-        if(rnd.nextInt(100) <= 20 && this.bloonList.get(a).getSpawnTime() + 2000 >= this.time){
+        if(rnd.nextInt(100) <= 20 && this.bloonList.get(a).getSpawnTime() + 2000 <= this.time){
             this.remove(this.bloonList.get(a));
             deleteList.add(this.bloonList.get(a));
-            this.removeLeben();
+            this.removeLeben(this.bloonList.get(a).getDmg());
         } 
     }    
     
@@ -126,12 +126,12 @@ public class Game extends JPanel{
         this.bloonCounter ++;
     }
     
-    public void addPoints(){
-        this.points += 1;
+    public void addPoints(int points){
+        this.points += points;
     }
     
-    public void removeLeben(){
-        this.leben -= 1;
+    public void removeLeben(int dmg){
+        this.leben -= dmg;
         if(leben <= 0){
             this.endGame();
         }        
@@ -168,7 +168,7 @@ public class Game extends JPanel{
     public void spawnRate(){
         if (spawnRate <= 8) {
             this.spawnRate = spawnRate + 0.1;
-            //System.out.println(spawnRate);
+            System.out.println(spawnRate);
         }
 
         
