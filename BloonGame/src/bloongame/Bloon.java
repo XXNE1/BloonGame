@@ -2,10 +2,12 @@ package bloongame;
 
 import java.awt.Color;
 import java.awt.Image;
+import java.net.URL;
 import java.util.Random;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JLabel;
 
 public class Bloon extends JButton{   
    private int richtungX;
@@ -39,8 +41,10 @@ public class Bloon extends JButton{
     public void sBloon(){
         this.setSize(14,14);
         try {
-        Image img = ImageIO.read(getClass().getResource("BloonGame/src/" + "blueBloon.png"));
-        this.setIcon(new ImageIcon(img));
+        ImageIcon iconSBloon = new ImageIcon(getClass().getResource("/sources/blueBloon.png"));
+        Image imgS = iconSBloon.getImage();
+        Image rszSBloonImg = imgS.getScaledInstance(14, 14, java.awt.Image.SCALE_SMOOTH);        
+        this.setIcon(new ImageIcon(rszSBloonImg));
         } catch (Exception ex) {
         System.out.println(ex);
         }
@@ -56,8 +60,15 @@ public class Bloon extends JButton{
     }
     
     private void lBloon(){
-       this.setSize(22,22);
-       this.setBackground(Color.red);
+        this.setSize(22,22);       
+        try {
+            ImageIcon iconLBloon = new ImageIcon(getClass().getResource("/sources/blueBloon.png"));
+            Image imgL = iconLBloon.getImage();
+            Image rszLBloonImg = imgL.getScaledInstance(14, 14, java.awt.Image.SCALE_SMOOTH);        
+            this.setIcon(new ImageIcon(rszLBloonImg));
+            } catch (Exception ex) {
+            System.out.println(ex);
+        }    
        this.setWerte(4); 
        this.setDmg(3);
     }
@@ -101,6 +112,10 @@ public class Bloon extends JButton{
     public void setWerte(int max){        
         this.richtungX = (rnd.nextInt(max)+1)*sign[rnd.nextInt(sign.length)];
         this.richtungY = (rnd.nextInt(max)+1)*sign[rnd.nextInt(sign.length)];        
+    }
+
+    private ImageIcon ImageIcon(URL resource) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
    
    

@@ -61,7 +61,7 @@ public class Game extends JPanel{
         Bloon newBloon = new Bloon(rnd.nextInt(3));               
         newBloon.setLocation(rnd.nextInt(this.getWidth() - statistik.getWidth() - 60)+30, rnd.nextInt(this.getHeight() - 60)+30);   
         newBloon.setSpawnTime(this.time);
-        
+  
         newBloon.addActionListener((ActionEvent ae) -> {                        
             this.addBloonCounter(); 
             this.addPoints(4 - newBloon.getDmg());   
