@@ -1,7 +1,10 @@
 package bloongame;
 
 import java.awt.Color;
+import java.awt.Image;
 import java.util.Random;
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 
 public class Bloon extends JButton{   
@@ -35,7 +38,12 @@ public class Bloon extends JButton{
    
     public void sBloon(){
         this.setSize(14,14);
-        this.setBackground(Color.yellow); 
+        try {
+        Image img = ImageIO.read(getClass().getResource("BloonGame/src/" + "blueBloon.png"));
+        this.setIcon(new ImageIcon(img));
+        } catch (Exception ex) {
+        System.out.println(ex);
+        }
         this.setWerte(8); 
         this.setDmg(1);
     }
