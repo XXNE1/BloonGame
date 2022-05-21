@@ -9,7 +9,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 
-public class Bloon extends JButton{   
+public class Bloon extends JLabel{   
    private int richtungX;
    private int richtungY;
    private int spawnTime;
@@ -54,7 +54,14 @@ public class Bloon extends JButton{
     
     private void mBloon(){
         this.setSize(18,18);
-        this.setBackground(Color.green);
+        try {
+            ImageIcon iconLBloon = new ImageIcon(getClass().getResource("/sources/blueBloon.png"));
+            Image imgL = iconLBloon.getImage();
+            Image rszLBloonImg = imgL.getScaledInstance(18, 18, java.awt.Image.SCALE_SMOOTH);        
+            this.setIcon(new ImageIcon(rszLBloonImg));
+            } catch (Exception ex) {
+            System.out.println(ex);
+        }    
         this.setWerte(6); 
         this.setDmg(2);
     }
@@ -64,7 +71,7 @@ public class Bloon extends JButton{
         try {
             ImageIcon iconLBloon = new ImageIcon(getClass().getResource("/sources/blueBloon.png"));
             Image imgL = iconLBloon.getImage();
-            Image rszLBloonImg = imgL.getScaledInstance(14, 14, java.awt.Image.SCALE_SMOOTH);        
+            Image rszLBloonImg = imgL.getScaledInstance(22, 22, java.awt.Image.SCALE_SMOOTH);        
             this.setIcon(new ImageIcon(rszLBloonImg));
             } catch (Exception ex) {
             System.out.println(ex);

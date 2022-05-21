@@ -3,6 +3,8 @@ package bloongame;
 import java.awt.Color;
 import javax.swing.JPanel;
 import java.awt.event.ActionEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.Random;
 import javax.swing.Timer;
@@ -21,8 +23,7 @@ public class Game extends JPanel{
     private int points = 0;
     private int bloonCounter;
     private double spawnRate = 3.0; //Bloons pro 5sec
-
-    
+   
     
     public Game(){
         this.setSize(780, 400);  
@@ -53,7 +54,7 @@ public class Game extends JPanel{
         }
         statistik.refresh(this.time, this.leben, this.points);
         this.time += t.getInitialDelay();        
-        this.newBloons();
+        this.newBloons();       
         this.repaint();
     }    
     
@@ -62,12 +63,14 @@ public class Game extends JPanel{
         newBloon.setLocation(rnd.nextInt(this.getWidth() - statistik.getWidth() - 60)+30, rnd.nextInt(this.getHeight() - 60)+30);   
         newBloon.setSpawnTime(this.time);
   
-        newBloon.addActionListener((ActionEvent ae) -> {                        
-            this.addBloonCounter(); 
-            this.addPoints(4 - newBloon.getDmg());   
-            deleteList.add(newBloon); 
-            this.remove(newBloon); 
-        });         
+        newBloon.addMouseListener(new MouseAdapter() { 
+            public void mousePressed(MouseEvent me) { 
+               addBloonCounter(); 
+                addPoints(4 - newBloon.getDmg());   
+                deleteList.add(newBloon); 
+                remove(newBloon); 
+            } 
+        }); 
         bloonList.add(newBloon);
     }
     
@@ -118,8 +121,20 @@ public class Game extends JPanel{
             this.remove(this.bloonList.get(a));
             deleteList.add(this.bloonList.get(a));
             this.removeLeben(this.bloonList.get(a).getDmg());
+            this.damageAnimation();
         } 
-    }    
+    }  
+    
+    public void damageAnimation(){        
+        this.setBackground(Color.red);   
+        this.repaint();
+    }
+    
+    public void spawnRate(){
+        if (spawnRate <= 8) {
+            this.spawnRate = spawnRate + 0.1;            
+        }        
+    }
     
     public void addBloonCounter() { //vielleicht anderer Name
         this.bloonCounter ++;
@@ -135,6 +150,12 @@ public class Game extends JPanel{
             this.endGame();
         }        
     }
+    
+    public void drawLine(){  // als Animation wenn Bloon zerstört wird
+        
+        
+    }
+    
 
     public void endGame() {        
         this.t.stop();
@@ -164,10 +185,8 @@ public class Game extends JPanel{
         // Endstats + ieleicht animation (eigenes Panel?)
     }
  
-    public void spawnRate(){
-        if (spawnRate <= 8) {
-            this.spawnRate = spawnRate + 0.1;            
-        }        
-    }
+   
+    
+    
     
 }
