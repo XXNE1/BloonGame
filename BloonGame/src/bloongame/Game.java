@@ -21,7 +21,7 @@ public class Game extends JPanel{
     private int time = 0;
     private int leben = 20;
     private int points = 0;
-    private int bloonCounter;
+    private int bloonCounter = 0;
     private double spawnRate = 3.0; //Bloons pro 5sec
    
     
@@ -126,8 +126,7 @@ public class Game extends JPanel{
     }  
     
     public void damageAnimation(){        
-        this.setBackground(Color.red);   
-        this.repaint();
+        
     }
     
     public void spawnRate(){
@@ -152,10 +151,8 @@ public class Game extends JPanel{
     }
     
     public void drawLine(){  // als Animation wenn Bloon zerstört wird
-        
-        
-    }
-    
+       
+    }    
 
     public void endGame() {        
         this.t.stop();
@@ -166,19 +163,22 @@ public class Game extends JPanel{
     }
     
     public void continueGame(){
-        t.start();
-        this.endScene();
+        t.start();        
     }
     
     public void restartGame(){
-        t.stop();
-        t.restart();
+        t.stop();        
         for (int i = 0; i < bloonList.size(); i++) {
             this.remove(bloonList.get(i));            
         }    
         this.repaint();    
-        this.bloonList.clear();
-        
+        this.bloonList.clear();        
+        time = 0;
+        leben = 20;
+        points = 0;
+        bloonCounter = 0;
+        spawnRate = 3.0; 
+        t.restart();
     }  
     
     public void endScene(){

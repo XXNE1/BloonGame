@@ -1,6 +1,6 @@
 //Jonas
-    pausiren / fortführen Button
-    reset Button
+    pausiren / fortführen Button --
+    reset Button --
 
 
 //Bene
@@ -10,14 +10,18 @@
     GitHub
 
 
-//Nelson
-    funcodes als Eingabe
+//Nelson    
     Bloon setWerte()   --
     Lebens spawnschutz time=2 ???  --
     unterschiedliche Punkte für bloons s=4 ; m=2 ; l=1 ; --
+    Balkenanzeige für Leben + highscore
+    Damageanimation + bloon hit animation
+    Winde, Wolken etc.
+    mehrere Modis
     lines 
-    Affen
-
+    Affen    
+    bonus level
+    funcodes als Eingabe
 
 BloonGame
 --
